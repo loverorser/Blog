@@ -98,5 +98,11 @@ RControl::
     if(SwitchPad == True)
         Send "0"
     else
-        Send "{RControl}"
+        Send "{RControl Down}"
+}
+
+RControl UP::
+{
+    if(SwitchPad == False)
+        Send "{RControl UP}"
 }
