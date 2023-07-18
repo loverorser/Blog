@@ -10,12 +10,15 @@ RShift::
     global
     if(SwitchPad == True){
         SwitchPad := False
+        SetNumLockState False
         ToolTip("关闭小键盘映射")
     }else{
         SwitchPad := True
+        SetNumLockState True
         ToolTip("打开小键盘映射")
     }
-    Send "{NumLock}"
+    ;Send "{NumLock}"
+    Send "{RShift}"
 
 
     SetTimer(RM, -1000)
