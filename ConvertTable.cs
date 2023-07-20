@@ -4,13 +4,25 @@ using DW.Table;
 using System.Text;
 using System.Xml.Linq;
 
-A.ConvertFolder("D:\\Table");
-Console.ReadLine();
+class Program {
+    static void Main(string[] args)
+    {
+        if (args.Length!=2)
+            throw new Exception("参数个数不合法！");
+        string inputPath = args[0];
+        string outputPath = args[1];
+        A.ConvertFolder(inputPath, outputPath);
+        return;
+        A.ConvertFolder("C:\\Users\\lijiaxing_b\\source\\repos\\TestTable\\TestTable\\Input",
+    "C:\\Users\\lijiaxing_b\\source\\repos\\TestTable\\TestTable\\Output");
+        Console.ReadLine();
+    }
+}
 class A
 {
-    public static void ConvertFolder(string folderPath)
+    public static void ConvertFolder(string inputPath,string outputPath)
     {
-        var files = Directory.GetFiles(folderPath, "*.*", searchOption: SearchOption.AllDirectories);
+        var files = Directory.GetFiles(inputPath, "*.*", searchOption: SearchOption.AllDirectories);
         int totalCount = files.Length;
         int count = 0;
         Console.WriteLine("开始转换表");
@@ -18,20 +30,33 @@ class A
         {
             count++;
             Console.WriteLine($"进度:{count}/{totalCount} 转换表:{v}");
-            Convert(v);
+            Convert(v,inputPath,outputPath);
 
         }
     }
 
-    public static void Convert(string txtPath)
+    public static void Convert(string txtPath,string inputPath,string outputPath)
     {
+        //"C:\Users\lijiaxing_b\source\repos\TestTable\TestTable\Input\Monster\Boss.txt"
+        //C:\Users\lijiaxing_b\source\repos\TestTable\TestTable\Input
+        //C:\Users\lijiaxing_b\source\repos\TestTable\TestTable\Output
         string tableNameWithTxt = txtPath.Substring(txtPath.LastIndexOf('\\')+1);
         string tableName = tableNameWithTxt.Substring(0, tableNameWithTxt.LastIndexOf('.'));
 
-        string csPath = $"C:\\{tableName}.cs";
+        string fulltTableNameWithTxt = txtPath.Replace(inputPath, "");
+        string fullTableName= fulltTableNameWithTxt.Substring(0, fulltTableNameWithTxt.LastIndexOf('.'));
+        string csPath = $"{outputPath}{fullTableName}.cs";
+
+        string dirPath = csPath.Substring(0, csPath.LastIndexOf('\\'));
+
+        if(!Directory.Exists(dirPath))
+        {
+            Directory.CreateDirectory(dirPath);
+        }
 
         if(File.Exists(csPath))
             File.Delete(csPath);
+
         StringBuilder sb = new StringBuilder();
         StringBuilder sb_init = new StringBuilder();
         StringBuilder sb_decl = new StringBuilder();
