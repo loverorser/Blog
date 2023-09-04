@@ -7,4 +7,4 @@
 
 [一种简单的状态机方案](一种简单的状态机方案.md)
 
-[关于Visual Studio的前进后退的问题](关于Visual Studio的前进后退的问题.md)
+[关于Visual Studio的前进后退的问题](关于VisualStudio的前进后退的问题.md)
