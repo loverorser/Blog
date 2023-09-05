@@ -8,3 +8,4 @@
 
 找到`View.NavigateForward`，改变快捷键成`Alt+Right Arrow(Global)`
 
+# 更新，就是傻逼Visual Assist的问题，建议把它卸掉，舒服了
