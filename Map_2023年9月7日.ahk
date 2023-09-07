@@ -1,0 +1,118 @@
+﻿RM()
+{
+    ToolTip()
+}
+
+SwitchPad := True
+DelayTime := 0
+~RShift Up::
+{
+    global
+    if((A_TickCount-DelayTime)>220){
+        ;ToolTip("大于")
+    }else{
+        Send "^{Space}"
+        if(SwitchPad == True){
+            SwitchPad := False
+            SetNumLockState False
+            ToolTip("关闭小键盘映射")
+        }else{
+            SwitchPad := True
+            SetNumLockState True
+            ToolTip("打开小键盘映射")
+        }
+    }
+    
+
+    ;Send "{NumLock}"
+    ;Send "{RShift}"
+
+
+    SetTimer(RM, -1000)
+
+}
+~RShift::{
+    global
+    DelayTime := A_TickCount
+}
+PrintScreen::
+{
+    if(SwitchPad == True)
+        Send "7"
+    else
+        Send "{PrintScreen}"
+}
+ScrollLock::
+{
+    if(SwitchPad == True)
+        Send "8"
+    else
+        Send "{ScrollLock}"
+}
+Pause::
+{
+    if(SwitchPad == True)
+        Send "9"
+    else
+        Send "{Pause}"
+}
+
+
+Insert::
+{
+    if(SwitchPad == True)
+        Send "4"
+    else
+        Send "{Insert}"
+}
+Home::
+{
+    if(SwitchPad == True)
+        Send "5"
+    else
+        Send "{Home}"
+}
+PgUp::
+{
+    if(SwitchPad == True)
+        Send "6"
+    else
+        Send "{PgUp}"
+}
+
+
+Delete::
+{
+    if(SwitchPad == True)
+        Send "1"
+    else
+        Send "{Delete}"
+}
+End::
+{
+    if(SwitchPad == True)
+        Send "2"
+    else
+        Send "{End}"
+}
+PgDn::
+{
+    if(SwitchPad == True)
+        Send "3"
+    else
+        Send "{PgDn}"
+}
+
+RControl::
+{
+    if(SwitchPad == True)
+        Send "0"
+    else
+        Send "{RControl Down}"
+}
+
+RControl UP::
+{
+    if(SwitchPad == False)
+        Send "{RControl UP}"
+}
